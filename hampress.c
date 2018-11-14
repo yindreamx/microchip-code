@@ -29,5 +29,8 @@ int main()
 	{
 		
 		if(press()==1)
+		{
+			P1 = !P1;
+		}
 	}
 }
