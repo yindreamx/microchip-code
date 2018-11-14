@@ -13,8 +13,11 @@ int press()
 	if (ON==0) //Nut duoc nhan
 	{ 
 		delay(); //Thoi gian de mach on dinh trang thai, bat 2 trang thai truoc va sau
-		while(!ON){} //Nut duoc nha
+		if (ON==0)
+		{
+			while(!ON){} //Nut duoc nha
 			return 1; //Co nut nhan
+		}
 	}
 	else
 		return 0; //Khong co nut nhan
