@@ -29,8 +29,5 @@ int main()
 	{
 		
 		if(press()==1)
-			P1 = 1;
-		else
-			P1 = 0;
 	}
 }
