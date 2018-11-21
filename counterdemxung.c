@@ -62,24 +62,25 @@ void LCD_string(unsigned char *var)
  
 void main()
 {
-	char str[20];
-	int dem;
-	unsigned char high, low;
+	char str[10];
+	//int dem;
+	//unsigned char high, low;
 	unsigned int display;
 	TMOD = 0x51;
 	LCD_setup(); //LCD Setup
 	LCD_cmd(0x80); //Set cursor
+	LCD_string("Xung:");
 	TR1 = 1;
+
 	while(1)
 	{
-		high = TH1;
-		low = TL1;
-		display = 256*high+low;
+//		high = TH1;     
+//		low = TL1;
+		display = (int)TH1*256+(int)TL1;
 		//Gan doan text can hien thi vao string
-		sprintf(str,"Xung: %d ",display);
-		LCD_string(str);
+		sprintf(str,"%d",display);
+		LCD_cmd(0x87);
+		LCD_string(str);	
+		
 	}
 }
-
-
-

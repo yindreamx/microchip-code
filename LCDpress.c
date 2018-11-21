@@ -61,7 +61,7 @@ void LCD_string(unsigned char *var)
 }
 int press()
 {
-	int dem = 0;
+	int dem = 19;
 	if (ON==0) //Nut duoc nhan
 	{ 
 		LCD_busy_delay(); //Thoi gian de mach on dinh trang thai, bat 2 trang thai truoc va sau
@@ -72,6 +72,7 @@ int press()
 	}
 	else
 		dem; //Khong co nut nhan
+
 }
  
 void main()
@@ -83,10 +84,12 @@ void main()
 	LCD_cmd(0x80); //Set cursor
 	while(1)
 	{
-		press();
+		dem=	press();
 		//Gan doan text can hien thi vao string
-		sprintf(str,"So lan nhan: %d",dem);
-		LCD_string();
+		LCD_cmd(0x80); 
+		sprintf(str,"Dem lan: %d",dem);
+		LCD_string(str);
+		
 	}
 }
 
