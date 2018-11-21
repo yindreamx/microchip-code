@@ -1,4 +1,4 @@
-#include <RX89X51.H>
+#include <REGX51.H>
 #define LCD_rs P2_5
 #define LCD_rw P2_6
 #define LCD_en P2_7
