@@ -64,19 +64,19 @@ void main()
 {
 	char str[20];
 	int dem;
-	TMOD = 0x05;
+	unsigned char high, low;
+	unsigned int display;
+	TMOD = 0x51;
 	LCD_setup(); //LCD Setup
 	LCD_cmd(0x80); //Set cursor
-	TR0 = 1;
+	TR1 = 1;
 	while(1)
 	{
-		high = TH0;
-		low = TL0;
-		display = high;
-		display << = 8;
-		display |= low;
+		high = TH1;
+		low = TL1;
+		display = 256*high+low;
 		//Gan doan text can hien thi vao string
-		sprintf(str,"Xung: %d ",number);
+		sprintf(str,"Xung: %d ",display);
 		LCD_string(str);
 	}
 }
