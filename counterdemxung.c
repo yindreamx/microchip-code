@@ -59,34 +59,25 @@ void LCD_string(unsigned char *var)
 	while(*var)
 		LCD_senddata(*var++);
 }
-int press()
-{
-	int dem = 0;
-	if (ON==0) //Nut duoc nhan
-	{ 
-		LCD_busy_delay(); //Thoi gian de mach on dinh trang thai, bat 2 trang thai truoc va sau
-		if (ON!=0)
-		{
-			dem=dem+1;
-		}
-	}
-	else
-		dem; //Khong co nut nhan
-}
  
 void main()
 {
 	char str[20];
 	int dem;
-	TMOD = 0x01;
+	TMOD = 0x05;
 	LCD_setup(); //LCD Setup
 	LCD_cmd(0x80); //Set cursor
+	TR0 = 1;
 	while(1)
 	{
-		press();
+		high = TH0;
+		low = TL0;
+		display = high;
+		display << = 8;
+		display |= low;
 		//Gan doan text can hien thi vao string
-		sprintf(str,"So lan nhan: %d",dem);
-		LCD_string();
+		sprintf(str,"Xung: %d ",number);
+		LCD_string(str);
 	}
 }
 
