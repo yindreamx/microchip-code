@@ -54,17 +54,6 @@ void LCD_string(unsigned char *var)
 	while(*var)
 		LCD_senddata(*var++);
 }
-void LCD_build(unsigned char loc, unsigned char *msg) //Ham nap du lieu vao CGRAM
-{
-	unsigned char i;
-	if (loc<8)
-	{
-		LCD_cmd(0x40+loc*8);
-		for (i=0;i<8;i++)
-			LCD_senddata(msg[i]);
-	}
-}
-
 void main()
 {
 	char data[10];
