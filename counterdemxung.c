@@ -74,8 +74,6 @@ void main()
 
 	while(1)
 	{
-//		high = TH1;     
-//		low = TL1;
 		display = (int)TH1*256+(int)TL1;
 		//Gan doan text can hien thi vao string
 		sprintf(str,"%d",display);

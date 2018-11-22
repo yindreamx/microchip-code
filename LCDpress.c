@@ -15,6 +15,7 @@ void LCD_busy_delay(void)
 	TR0 = 0;
 	TF0 = 0;
 }
+
 void LCD_cmd(unsigned char var)
 {
 	//Set cursor
@@ -25,6 +26,7 @@ void LCD_cmd(unsigned char var)
 	LCD_en = 0;
 	LCD_busy_delay();
 }
+
 void LCD_shift(var)
 {
 	LCD_rs = 0;
@@ -34,6 +36,7 @@ void LCD_shift(var)
 	LCD_en = 0;
 	LCD_busy_delay();
 }
+
 void LCD_setup()
 {
 	//Function Set
@@ -45,6 +48,7 @@ void LCD_setup()
 	//Clear Display
 	LCD_cmd(0x01);
 }
+
 void LCD_senddata(unsigned char var)
 {
 	LCD_rs = 1;
@@ -54,42 +58,49 @@ void LCD_senddata(unsigned char var)
 	LCD_en = 0;
 	LCD_busy_delay();
 }
+
 void LCD_string(unsigned char *var)
 {
 	while(*var)
 		LCD_senddata(*var++);
 }
+
 int press()
 {
-	int dem = 19;
+	int dem;
 	if (ON==0) //Nut duoc nhan
-	{ 
+	{ 	
 		LCD_busy_delay(); //Thoi gian de mach on dinh trang thai, bat 2 trang thai truoc va sau
 		if (ON!=0)
 		{
-			dem=dem+1;
+			return 1;
 		}
 	}
 	else
-		dem; //Khong co nut nhan
+		return 0; //Khong co nut nhan
+	
 
 }
  
 void main()
 {
 	char str[20];
-	int dem;
+	char dem = 0;
 	TMOD = 0x01;
 	LCD_setup(); //LCD Setup
 	LCD_cmd(0x80); //Set cursor
+	LCD_string("Dem lan: ");
 	while(1)
 	{
-		dem=	press();
+		if (press()==1)
+		{
+			dem = dem+1;
+		}
 		//Gan doan text can hien thi vao string
-		LCD_cmd(0x80); 
-		sprintf(str,"Dem lan: %d",dem);
+		LCD_cmd(0x89); 
+		sprintf(str,"%d",dem);
 		LCD_string(str);
-		
+		LCD_busy_delay();
 	}
 }
 
