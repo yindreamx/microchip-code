@@ -67,7 +67,6 @@ void LCD_string(unsigned char *var)
 
 int press()
 {
-	int dem;
 	if (ON==0) //Nut duoc nhan
 	{ 	
 		LCD_busy_delay(); //Thoi gian de mach on dinh trang thai, bat 2 trang thai truoc va sau
