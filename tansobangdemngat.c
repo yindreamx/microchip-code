@@ -5,9 +5,9 @@
 #define LCD_en P2_7
 #define LCD_data P0
 #define ON P1_0
-volatile int display;
+volatile int display=0;
 volatile int fre;
-
+int dem=0;
 
 void LCD_busy_delay(void)
 {
@@ -64,16 +64,23 @@ void LCD_string(unsigned char *var)
 }
 
 void tanso(void) interrupt 1
-{
-	char str[10];
+{ 	
+
 	TR0 = 0;
 	TR1 = 0;
-	display = (int)TH1*256+(int)TL1;
-	fre = display *20;
 	TH0 = 0x3C;
 	TL0 = 0xB0;
+	dem++;
+	display= display + ((int)TH1*256+(int)TL1);
 	TH1 = 0x00;
 	TL1 = 0x00;
+	if (dem==20)
+	{
+		fre=display;
+		dem=0;
+		display=0;
+	}
+	
 	TR0 = 1;
 	TR1 = 1;
 }
